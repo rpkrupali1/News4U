@@ -6,6 +6,8 @@ so that I can keep up with the current events
 ### Acceptant Criteria
 Given I opened the News4U Web
 
+Then I should be able to see top headlines and search bar
+
 When I input specific keyword
 
 Then I should be able to see top 10 news articles related to entered keywprds
