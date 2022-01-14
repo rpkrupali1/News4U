@@ -26,20 +26,36 @@ var displayData = function(data){
     console.log(data);
     var articles = data.articles;
     for (let i = 0; i < 10; i++) {
+        var parentArticleEl = document.createElement("div");
+        parentArticleEl.classList = "row articleborder";
+
         var containerEl = document.createElement("div");
-        var titleEl = document.createElement("h2");
+        containerEl.classList = "col s8 container";
+        
+        var titleEl = document.createElement("h4");
         titleEl.textContent = articles[i].title;
+        titleEl.classList = "row title";
         containerEl.appendChild(titleEl);
 
-        var descriptionEl = document.createElement("h3");
+
+        var descriptionEl = document.createElement("h6");
         descriptionEl.textContent = articles[i].description;
+        descriptionEl.classList = "row subtitle";
         containerEl.appendChild(descriptionEl);
+
+        var contentEl = document.createElement("p");
+        contentEl.textContent = articles[i].content;
+        contentEl.classList = "row";
+        containerEl.appendChild(contentEl);
 
         var imageEl = document.createElement("img");
         imageEl.src = articles[i].image;
-        containerEl.appendChild(imageEl);
+        imageEl.classList = "col s4";
 
-        displayresultsEl.appendChild(containerEl);
+        parentArticleEl.appendChild(containerEl);
+        parentArticleEl.appendChild(imageEl);
+
+        displayresultsEl.appendChild(parentArticleEl);
     }
 }
     
