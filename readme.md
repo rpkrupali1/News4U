@@ -34,4 +34,4 @@ Then I should receive search result within those parameters
 
 
 #### Technologies Used
-API Used: https://newsapi.org/
+API Used: https://gnews.io/

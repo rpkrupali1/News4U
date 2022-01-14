@@ -6,8 +6,7 @@ var apiKey = "08c09a0a9d776ef2eba4f3713f19ff9e"
 
 var getTopHeadlines = function() {
 
-    var topHeadlinesUrl = "https://gnews.io/api/v4/top-headlines?token=" + apiKey;
-    //var topHeadlinesUrl = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=" + apiKey;
+    var topHeadlinesUrl = "https://gnews.io/api/v4/top-headlines?token=" + apiKey + "&lang=en&country=us&max=10";
     fetch(topHeadlinesUrl).then(function(response){
         if(response.ok){
             console.log(response);
@@ -57,29 +56,7 @@ var resultsHeadlines = function(event) {
         displayresultsEl.textContent = "";
         topicInputEl.value = "";
     }
-
 }
-
-
-//headlinesKeyword.textContent = keyword;
-
-// loop
-// for (var i = 0; i <headlines.length; i++) {
-//     var headlinesName = headlines[i];
-    
-
-//     var headlinesEl = document.createElement("div");
-//     headlinesEl.classList = "list-item";
-
-//     var newsEl = document.createElement("span");
-//     newsEl.textContent = headlinesName;
-
-//     headlinesEl.appendChild(newsEl);
-
-
-
-//     displayresultsEl.appendChild(headlinesEl);
-// }
 
 getTopHeadlines();
 
