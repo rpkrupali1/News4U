@@ -14,6 +14,9 @@
         <nav class="top-nav #80d8ff light-blue accent-1">
             <div class="nav-wrapper">
               <!-- <a href="#!" class="brand-logo">News 4 U</a> -->
+              <a href="#!" class="brand-logo">
+                <img src="./assets/images/Logo.PNG">
+              </a>
               <form class="right">
                 <div class="input-field">
                   <input id="search" type="search" required>
@@ -23,43 +26,44 @@
               </form>
             </div>
         </nav>
-        <div class="sidenav sidenav-fixed" style="transform: translateX(0px);">
-            <a href="./assets/images/Logo.PNG" class="brand-logo">
-                <!-- <object type="image" data="./assets/images/Logo.PNG"></object> -->
-                <img src="./assets/images/Logo.PNG">
-            </a>
-            <div id="filters" class="black-text">
-                <div id="publisher" class="" >
-                    <a class="dropdown-trigger btn light-blue accent-1 black-text" href="#" data-target="publisherdropdown" >Publisher</a>
-                    <ul id="publisherdropdown" class='dropdown-content'>
-                        <li><a href="#!">one</a></li>
-                        <li><a href="#!">two</a></li>
-                    </ul>
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div id="filters" class="black-text">
+                    <div id="publisher" class="" >
+                        <a class="dropdown-trigger btn light-blue accent-1 black-text" href="#" data-target="publisherdropdown" >Publisher</a>
+                        <ul id="publisherdropdown" class='dropdown-content'>
+                            <li><a href="#!">one</a></li>
+                            <li><a href="#!">two</a></li>
+                        </ul>
+                    </div>
+                    <div id="title">
+                        <label>
+                            <input type="checkbox" class="filled-in" checked="checked" />
+                            <span class="black-text">Include Title </span>
+                        </label>
+                    </div>
+                    <div id="content">
+                        <label>
+                            <input type="checkbox" class="filled-in" checked="checked" />
+                            <span class="black-text">Include Content </span>
+                        </label>
+                    </div>
+                    <div id="numberofresults" class="input-field col s12">
+                        <select>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">10</option>
+                            <option value="2">20</option>
+                            <option value="3">30</option>
+                        </select>
+                        <label class="black-text">Select number of search result to return</label>
+                    </div>
                 </div>
-                <div id="title">
-                    <label>
-                        <input type="checkbox" class="filled-in" checked="checked" />
-                        <span class="black-text">Include Title </span>
-                    </label>
-                </div>
-                <div id="content">
-                    <label>
-                        <input type="checkbox" class="filled-in" checked="checked" />
-                        <span class="black-text">Include Content </span>
-                    </label>
-                </div>
-                <div id="numberofresults" class="input-field col s12">
-                    <select>
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">10</option>
-                        <option value="2">20</option>
-                        <option value="3">30</option>
-                    </select>
-                    <label class="black-text">Select number of search result to return</label>
-                </div>
-            </div>
-            <div id="search-history"></div>
-        </div>
+            </li>
+            <li>
+                <div id="search-history"></div>
+            </li>
+        </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
     </header>
     <main>

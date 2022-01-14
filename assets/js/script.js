@@ -39,8 +39,7 @@ var displayData = function(data){
         imageEl.src = articles[i].image;
         containerEl.appendChild(imageEl);
 
-        displayresultsEl.appendChild(containerEl)
-        //console.log(articles[i].url);        
+        displayresultsEl.appendChild(containerEl);
     }
 }
     
@@ -60,10 +59,14 @@ var resultsHeadlines = function(event) {
 
 getTopHeadlines();
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     var elems = document.querySelectorAll('select');
-//     var instances = M.FormSelect.init(elems, options);
-//   });
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems);
+  });
 
+document.addEventListener('DOMContentLoaded', function() {
+    var sidenavEl = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenavEl);
+  });
 
 rightEl.addEventListener("search", resultsHeadlines);
