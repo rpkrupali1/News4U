@@ -33,8 +33,12 @@ var displayData = function(data){
         containerEl.classList = "col s8 container";
         
         var titleEl = document.createElement("h4");
-        titleEl.textContent = articles[i].title;
         titleEl.classList = "row title";
+        titleLinkEl = document.createElement("a");
+        titleLinkEl.href = articles[i].url;
+        titleLinkEl.textContent = articles[i].title;
+        titleLinkEl.setAttribute("target","_blank");
+        titleEl.appendChild(titleLinkEl);
         containerEl.appendChild(titleEl);
 
 
@@ -48,9 +52,13 @@ var displayData = function(data){
         contentEl.classList = "row";
         containerEl.appendChild(contentEl);
 
+        //var imageDivEl = document.createElement("div");
+        //imageDivEl.classList = "col s4";
         var imageEl = document.createElement("img");
         imageEl.src = articles[i].image;
         imageEl.classList = "col s4";
+        //imageDivEl.appendChild(imageEl);
+        
 
         parentArticleEl.appendChild(containerEl);
         parentArticleEl.appendChild(imageEl);
