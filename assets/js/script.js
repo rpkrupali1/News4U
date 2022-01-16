@@ -81,10 +81,14 @@ var displayData = function(data){
     }
 }
 
-
+var clearContents = function(){
+    //clear news display
+    displayresultsEl.textContent = "";
+}
 
 var searchFormHandler = function(event){
     event.preventDefault();
+    clearContents();
     var searchKeyword = searchInputEl.value.trim();
     getNewsByKeyword(searchKeyword);
 }
