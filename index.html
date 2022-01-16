@@ -11,22 +11,27 @@
 </head>
 <body>
     <header>
-        <nav class="top-nav #80d8ff light-blue accent-1">
-            <div class="nav-wrapper">
-              <!-- <a href="#!" class="brand-logo">News 4 U</a> -->
-              <a href="#!" class="brand-logo">
-                <img src="./assets/images/Logo.PNG">
-              </a>
-              <form class="right">
-                <div class="input-field">
-                  <input id="search" type="search" required>
-                  <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
-                  <i class="material-icons">close</i>
+        <div>
+            <nav class="top-nav #80d8ff light-blue accent-1">
+                <div class="nav-wrapper">
+                  <!-- <a href="#!" class="brand-logo">News 4 U</a> -->
+                  <a href="#!" class="brand-logo right">
+                    <img src="./assets/images/Logo.PNG">
+                  </a>
                 </div>
-              </form>
-            </div>
-        </nav>
+            </nav>
+        </div>
+
         <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <form>
+                    <div class="input-field">
+                      <input id="search" type="search" required>
+                      <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+            </li>
             <li>
                 <div id="filters" class="black-text">
                     <h5>Select Filters:</h5>
@@ -68,7 +73,7 @@
 
     </header>
     <main>
-        <div class="subtitle">Top 10 US Headlines:</div>
+        <div class="subtitle" style="margin-top: 10px;">Top 10 US Headlines:</div>
         <div id="displayresult"></div>
     </main>
     <footer>
