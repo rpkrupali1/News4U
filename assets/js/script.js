@@ -6,6 +6,7 @@ var apiKey = "08c09a0a9d776ef2eba4f3713f19ff9e";
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
+var filterListEl = document.querySelector("#filter-list");
 
 var getTopHeadlines = function() {
     var topHeadlinesUrl = "https://gnews.io/api/v4/top-headlines?token=" + apiKey + "&lang=en&country=us&max=10";
@@ -89,6 +90,7 @@ var clearContents = function(){
 var searchFormHandler = function(event){
     event.preventDefault();
     clearContents();
+    filterListEl.style.display = "block";
     var searchKeyword = searchInputEl.value.trim();
     getNewsByKeyword(searchKeyword);
 }
