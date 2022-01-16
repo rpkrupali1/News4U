@@ -2,15 +2,17 @@ var displayresultsEl = document.querySelector("#displayresult");
 var headlinesKeyword = document.querySelector("#keyword");
 var rightEl = document.querySelector(".right");
 var topicInputEl = document.querySelector("#search");
-var apiKey = "08c09a0a9d776ef2eba4f3713f19ff9e"
+var apiKey = "08c09a0a9d776ef2eba4f3713f19ff9e";
+var searchFormEl = document.querySelector("#search-form");
+var searchInputEl = document.querySelector("#search-input");
+var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
 
 var getTopHeadlines = function() {
-
     var topHeadlinesUrl = "https://gnews.io/api/v4/top-headlines?token=" + apiKey + "&lang=en&country=us&max=10";
     fetch(topHeadlinesUrl).then(function(response){
-        if(response.ok){
-            console.log(response);
+        if(response.ok){            
             response.json().then(function(data){
+                displayresultSubtitleEl.textContent = "Top 10 US Headlines:";
                 displayData(data);
             })
         }
@@ -22,8 +24,25 @@ var getTopHeadlines = function() {
     })
 }
 
-var displayData = function(data){
-    console.log(data);
+var getNewsByKeyword = function(keyword){
+    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=10";
+    fetch(searchUrl).then(function(response){
+        if(response.ok){            
+            response.json().then(function(data){
+                console.log(data);
+                displayresultSubtitleEl.textContent = "Top 10 news for " + keyword + " in US";
+                displayData(data);
+            })
+        }
+        else
+            alert("APi does not work");
+    })
+    .catch(function(error){
+        alert("something went wrong: looks like news api is down");
+    })
+}
+
+var displayData = function(data){    
     var articles = data.articles;
     for (let i = 0; i < 10; i++) {
         var parentArticleEl = document.createElement("div");
@@ -41,7 +60,6 @@ var displayData = function(data){
         titleEl.appendChild(titleLinkEl);
         containerEl.appendChild(titleEl);
 
-
         var descriptionEl = document.createElement("h6");
         descriptionEl.textContent = articles[i].description;
         descriptionEl.classList = "row subtitle";
@@ -52,13 +70,9 @@ var displayData = function(data){
         contentEl.classList = "row";
         containerEl.appendChild(contentEl);
 
-        //var imageDivEl = document.createElement("div");
-        //imageDivEl.classList = "col s4";
         var imageEl = document.createElement("img");
         imageEl.src = articles[i].image;
-        imageEl.classList = "col s4";
-        //imageDivEl.appendChild(imageEl);
-        
+        imageEl.classList = "col s4";        
 
         parentArticleEl.appendChild(containerEl);
         parentArticleEl.appendChild(imageEl);
@@ -66,21 +80,16 @@ var displayData = function(data){
         displayresultsEl.appendChild(parentArticleEl);
     }
 }
-    
 
-var resultsHeadlines = function(event) {
+
+
+var searchFormHandler = function(event){
     event.preventDefault();
-
-    var topic = topicInputEl.value.trim();
-
-    if(topic) {
-        getTopHeadlines(topic);
-
-        displayresultsEl.textContent = "";
-        topicInputEl.value = "";
-    }
+    var searchKeyword = searchInputEl.value.trim();
+    getNewsByKeyword(searchKeyword);
 }
 
+// Get top 10 headlines for US in english as soon as page is loaded
 getTopHeadlines();
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -93,4 +102,4 @@ document.addEventListener('DOMContentLoaded', function() {
     M.Sidenav.init(sidenavEl);
   });
 
-rightEl.addEventListener("search", resultsHeadlines);
+searchFormEl.addEventListener("submit",searchFormHandler);

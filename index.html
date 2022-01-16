@@ -30,9 +30,9 @@
                   </a>
             </li>
             <li class="search">
-                <form>
-                    <input id="search" placeholder=" search by news topics" type="search" required ></input>
-                    <button class="btn light-blue accent-1 black-text center-align">
+                <form id="search-form">
+                    <input id="search-input" placeholder=" search by news topics" type="search" required ></input>
+                    <button class="btn light-blue accent-1 black-text center-align" type="submit" id="search-btn">
                         Search
                         <i class="material-icons">search</i>
                     </button>
@@ -79,7 +79,7 @@
 
     </header>
     <main>
-        <div class="subtitle" style="margin-top: 10px;">Top 10 US Headlines:</div>
+        <div id="displayresult-subtitle" class="subtitle" style="margin-top: 10px;"></div>
         <div id="displayresult"></div>
     </main>
     <footer>
