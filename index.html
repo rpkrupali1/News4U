@@ -4,11 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>News4U</title>
 </head>
 <body>
+    <header>
+        <div>
+            <nav class="top-nav #80d8ff light-blue accent-1">
+                <div class="nav-wrapper">
+                  <!-- <a href="#!" class="brand-logo">News 4 U</a> -->
+                  <a href="#!" class="brand-logo right">
+                    <img src="./assets/images/Logo.PNG">
+                  </a>
+                </div>
+            </nav>
+        </div>
+
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <form>
+                    <div class="input-field">
+                      <input id="search" type="search" required>
+                      <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+            </li>
+            <li>
+                <div id="filters" class="black-text">
+                    <h5>Select Filters:</h5>
+                    <div id="publisher" class="" >
+                        <a class="dropdown-trigger btn light-blue accent-1 black-text" href="#" data-target="publisherdropdown" >Publisher</a>
+                        <ul id="publisherdropdown" class='dropdown-content'>
+                            <li><a href="#!">one</a></li>
+                            <li><a href="#!">two</a></li>
+                        </ul>
+                    </div>
+                    <div id="title">
+                        <label>
+                            <input type="checkbox" class="filled-in" checked="checked" />
+                            <span class="black-text">Include Title </span>
+                        </label>
+                    </div>
+                    <div id="content">
+                        <label>
+                            <input type="checkbox" class="filled-in" checked="checked" />
+                            <span class="black-text">Include Content </span>
+                        </label>
+                    </div>
+                    <div id="numberofresults" class="input-field col s12">
+                        <select>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">10</option>
+                            <option value="2">20</option>
+                            <option value="3">30</option>
+                        </select>
+                        <label class="black-text">Select number of search result to return</label>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div id="search-history"></div>
+            </li>
+        </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+    </header>
+    <main>
+        <div class="subtitle" style="margin-top: 10px;">Top 10 US Headlines:</div>
+        <div id="displayresult"></div>
+    </main>
+    <footer>
+
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
