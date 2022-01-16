@@ -1,3 +1,20 @@
+# News 4 U
+
+## Pupose
+Build news website to display news headlines and news based on user input
+
+## Site Details
+As soon as user launches website then :
+- User will side navigation on left to search news by keyword
+- In middle of screen user will see subtitle as "TOP 10 US Headlines"
+- User will see top 10 US headlines in English
+
+When user search for specific news topic then :
+- Subtitle will be replaced based on user input
+- Top 10 US headlines will be removed
+- User will see top 10 news based on search input
+- User should be able to see filter
+
 # User Story
 As a reader,
 I should be able to search using most important topics/discusson of my interests,
