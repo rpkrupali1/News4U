@@ -2,7 +2,7 @@ var displayresultsEl = document.querySelector("#displayresult");
 var headlinesKeyword = document.querySelector("#keyword");
 var rightEl = document.querySelector(".right");
 var topicInputEl = document.querySelector("#search");
-var apiKey = "08c09a0a9d776ef2eba4f3713f19ff9e";
+var apiKey = "7f4103b7675c7b27aace6b600c18c3c4";
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
@@ -112,6 +112,22 @@ var selectArticleHandler = function(event){
     console.log(searchUrl);
     //getNewsByKeyword(searchUrl);
 }
+var youtubeApi = function() {
+fetch("https://youtube-v31.p.rapidapi.com/search?q=news&part=snippet%2Cid&regionCode=US&maxResults=50&order=date", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "youtube-v31.p.rapidapi.com",
+		"x-rapidapi-key": "bdbf0b8d16msha71b0d16f73c768p16e649jsnefa08120e0c5"
+	}
+})
+.then(response => {
+	console.log(response);
+})
+.catch(err => {
+	console.error(err);
+});
+}
+youtubeApi();
 
 // Get top 10 headlines for US in english as soon as page is loaded
 //getTopHeadlines();
