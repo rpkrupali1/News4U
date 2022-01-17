@@ -13,7 +13,10 @@ When user search for specific news topic then :
 - Subtitle will be replaced based on user input
 - Top 10 US headlines will be removed
 - User will see top 10 news based on search input
-- User should be able to see filter
+- User should be able to see following filters
+    - Select number of articles to be displayed. Options are 10, 20, 30, 40, 50. Default and selected is 10
+
+When user selects number of articles then based on selection number of articles should be displayed in main screen
 
 # User Story
 As a reader,

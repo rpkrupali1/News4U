@@ -7,7 +7,10 @@ var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
 var filterListEl = document.querySelector("#filter-list");
+var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
+var keyword;
 
+//get top 10 headlines
 var getTopHeadlines = function() {
     var topHeadlinesUrl = "https://gnews.io/api/v4/top-headlines?token=" + apiKey + "&lang=en&country=us&max=10";
     fetch(topHeadlinesUrl).then(function(response){
@@ -25,9 +28,10 @@ var getTopHeadlines = function() {
     })
 }
 
-var getNewsByKeyword = function(keyword){
-    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=10";
-    fetch(searchUrl).then(function(response){
+//get news based on url
+var getNewsByKeyword = function(url){
+    //var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=10";
+    fetch(url).then(function(response){
         if(response.ok){            
             response.json().then(function(data){
                 console.log(data);
@@ -43,9 +47,10 @@ var getNewsByKeyword = function(keyword){
     })
 }
 
+// display srticles in main screens based on given data
 var displayData = function(data){    
     var articles = data.articles;
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < articles.length; i++) {
         var parentArticleEl = document.createElement("div");
         parentArticleEl.classList = "row articleborder";
 
@@ -87,16 +92,29 @@ var clearContents = function(){
     displayresultsEl.textContent = "";
 }
 
+// Handle display articles based on users keyword
 var searchFormHandler = function(event){
     event.preventDefault();
     clearContents();
     filterListEl.style.display = "block";
-    var searchKeyword = searchInputEl.value.trim();
-    getNewsByKeyword(searchKeyword);
+    keyword = searchInputEl.value.trim();
+    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=10";
+    console.log(searchUrl);
+    //getNewsByKeyword(searchUrl);
+}
+
+// handle number of articles to be displayed by user input
+var selectArticleHandler = function(event){
+    event.preventDefault();
+    var numOfArticles = event.target.value;
+    clearContents();
+    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numOfArticles;
+    console.log(searchUrl);
+    //getNewsByKeyword(searchUrl);
 }
 
 // Get top 10 headlines for US in english as soon as page is loaded
-getTopHeadlines();
+//getTopHeadlines();
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
@@ -109,3 +127,4 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 searchFormEl.addEventListener("submit",searchFormHandler);
+selectNumOfArticlesEl.addEventListener("change", selectArticleHandler);

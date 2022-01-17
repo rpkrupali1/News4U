@@ -31,7 +31,7 @@
             </li>
             <li class="search">
                 <form id="search-form">
-                    <input id="search-input" placeholder=" search by news topics" type="search" required ></input>
+                    <input id="search-input" placeholder=" search articles" type="search" required ></input>
                     <button class="btn light-blue accent-1 black-text center-align" type="submit" id="search-btn">
                         Search
                         <i class="material-icons">search</i>
@@ -61,13 +61,14 @@
                         </label>
                     </div>
                     <div id="numberofresults" class="input-field col s12">
-                        <select>
-                            <option value="" disabled selected>Choose your option</option>
-                            <option value="1">10</option>
-                            <option value="2">20</option>
-                            <option value="3">30</option>
+                        <select id="select-numofarticles">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
                         </select>
-                        <label class="black-text">Select number of search result to return</label>
+                        <label>Select number of articles to be returned</label>
                     </div>
                 </div>
             </li>
