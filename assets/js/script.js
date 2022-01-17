@@ -8,7 +8,10 @@ var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
 var filterListEl = document.querySelector("#filter-list");
 var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
-var keyword;
+var keyword = { 
+    keyword: searchInputEl.value.trim()
+};
+
 
 //get top 10 headlines
 var getTopHeadlines = function() {
@@ -100,8 +103,12 @@ var searchFormHandler = function(event){
     keyword = searchInputEl.value.trim();
     var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=10";
     console.log(searchUrl);
-    //getNewsByKeyword(searchUrl);
+    getNewsByKeyword(searchUrl);
+localStorage.setItem("keyword",JSON.stringify(keyword));
 }
+
+
+
 
 // handle number of articles to be displayed by user input
 var selectArticleHandler = function(event){
@@ -110,7 +117,7 @@ var selectArticleHandler = function(event){
     clearContents();
     var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numOfArticles;
     console.log(searchUrl);
-    //getNewsByKeyword(searchUrl);
+    getNewsByKeyword(searchUrl);
 }
 var youtubeApi = function() {
 fetch("https://youtube-v31.p.rapidapi.com/search?q=news&part=snippet%2Cid&regionCode=US&maxResults=50&order=date", {
@@ -130,7 +137,7 @@ fetch("https://youtube-v31.p.rapidapi.com/search?q=news&part=snippet%2Cid&region
 youtubeApi();
 
 // Get top 10 headlines for US in english as soon as page is loaded
-//getTopHeadlines();
+getTopHeadlines();
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
