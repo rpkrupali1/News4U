@@ -8,10 +8,9 @@ var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
 var filterListEl = document.querySelector("#filter-list");
 var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
-var keyword = { 
-    keyword: searchInputEl.value.trim()
-};
-
+var keyword;
+var searchlistEl = document.querySelector("li");
+var resultsEl = document.querySelector("#search-history");
 
 //get top 10 headlines
 var getTopHeadlines = function() {
@@ -40,6 +39,7 @@ var getNewsByKeyword = function(url){
                 console.log(data);
                 displayresultSubtitleEl.textContent = "Top 10 news for " + keyword + " in US";
                 displayData(data);
+               
             })
         }
         else
@@ -100,13 +100,20 @@ var searchFormHandler = function(event){
     event.preventDefault();
     clearContents();
     filterListEl.style.display = "block";
-    keyword = searchInputEl.value.trim();
+
+    var keyword = searchInputEl.value;
+    var searchlistEl = document.createElement("li");
+    searchlistEl.className = "search-history";
+    searchlistEl.textContent = keyword;
+    resultsEl.appendChild(searchlistEl); 
+     
+    var keyword = searchInputEl.value.trim();
     var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=10";
     console.log(searchUrl);
     getNewsByKeyword(searchUrl);
+
 localStorage.setItem("keyword",JSON.stringify(keyword));
 }
-
 
 
 
@@ -118,6 +125,7 @@ var selectArticleHandler = function(event){
     var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numOfArticles;
     console.log(searchUrl);
     getNewsByKeyword(searchUrl);
+    
 }
 var youtubeApi = function() {
 fetch("https://youtube-v31.p.rapidapi.com/search?q=news&part=snippet%2Cid&regionCode=US&maxResults=50&order=date", {
@@ -134,7 +142,7 @@ fetch("https://youtube-v31.p.rapidapi.com/search?q=news&part=snippet%2Cid&region
 	console.error(err);
 });
 }
-youtubeApi();
+//youtubeApi();
 
 // Get top 10 headlines for US in english as soon as page is loaded
 getTopHeadlines();
