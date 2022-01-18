@@ -9,6 +9,8 @@ var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
 var filterListEl = document.querySelector("#filter-list");
 var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
 var keyword;
+var numberOfArticles = 10;
+var checkboxEls = document.querySelectorAll("input[type=checkbox]");
 
 //get top 10 headlines
 var getTopHeadlines = function() {
@@ -98,23 +100,42 @@ var searchFormHandler = function(event){
     clearContents();
     filterListEl.style.display = "block";
     keyword = searchInputEl.value.trim();
-    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=10";
+    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
     console.log(searchUrl);
-    //getNewsByKeyword(searchUrl);
+    getNewsByKeyword(searchUrl);
 }
 
 // handle number of articles to be displayed by user input
 var selectArticleHandler = function(event){
     event.preventDefault();
-    var numOfArticles = event.target.value;
+    numberOfArticles = event.target.value;
     clearContents();
-    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numOfArticles;
+    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
     console.log(searchUrl);
-    //getNewsByKeyword(searchUrl);
+    getNewsByKeyword(searchUrl);
+}
+
+//handle articles displayed based on checkbox value
+var checkboxHandler = function(event){
+    event.preventDefault();
+    clearContents();
+    var includeInTitle = document.querySelector("#title-input").checked;
+    var includeInDescription = document.querySelector("#description-input").checked ;
+    var url;
+    if(includeInTitle && includeInDescription)
+        url = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=title,description";
+    else if(includeInTitle && !includeInDescription)
+        url = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=title";
+    else if(includeInDescription && !includeInTitle)
+        url = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=description";
+    else
+        url = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
+    console.log(url);
+    getNewsByKeyword(url);
 }
 
 // Get top 10 headlines for US in english as soon as page is loaded
-//getTopHeadlines();
+getTopHeadlines();
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
@@ -128,3 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 searchFormEl.addEventListener("submit",searchFormHandler);
 selectNumOfArticlesEl.addEventListener("change", selectArticleHandler);
+for (let i = 0; i < checkboxEls.length; i++) {
+    checkboxEls[i].addEventListener("change",checkboxHandler);    
+}

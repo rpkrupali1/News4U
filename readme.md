@@ -18,6 +18,8 @@ When user search for specific news topic then :
 
 When user selects number of articles then based on selection number of articles should be displayed in main screen
 
+By default search keyword is used in articles description and title and user has choice to select option to search keyword either in title or description. 
+
 # User Story
 As a reader,
 I should be able to search using most important topics/discusson of my interests,
