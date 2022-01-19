@@ -127,22 +127,17 @@ var selectArticleHandler = function(event){
     getNewsByKeyword(searchUrl);
     
 }
-var youtubeApi = function() {
-fetch("https://youtube-v31.p.rapidapi.com/search?q=news&part=snippet%2Cid&regionCode=US&maxResults=50&order=date", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "youtube-v31.p.rapidapi.com",
-		"x-rapidapi-key": "bdbf0b8d16msha71b0d16f73c768p16e649jsnefa08120e0c5"
-	}
-})
-.then(response => {
-	console.log(response);
-})
-.catch(err => {
-	console.error(err);
-});
-}
-//youtubeApi();
+var getYoutube = function(keyword) {
+    var youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=date&key=AIzaSyCAoLepN9x5w2XSN3Uq3eNNH7l7K0OHSsI'
+  
+  fetch(youtubeApi).then(function(response){
+    if (response.ok){
+      response.json().then(function(data){
+        console.log(data)
+      })
+    }
+  })
+  }
 
 // Get top 10 headlines for US in english as soon as page is loaded
 getTopHeadlines();
@@ -159,3 +154,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 searchFormEl.addEventListener("submit",searchFormHandler);
 selectNumOfArticlesEl.addEventListener("change", selectArticleHandler);
+getYoutube("biden")
