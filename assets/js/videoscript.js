@@ -1,3 +1,5 @@
+var keyword;
+
 var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
 
 var getYoutubeHeadlines = function() {
@@ -35,6 +37,23 @@ var getNewsByKeyword = function(url){
     })
 }
 
+//save data in local storage
+var saveKeywords = function(keyword){
+    var newsSearchHistory = JSON.parse(window.localStorage.getItem("keywords")) || [];
+    var newKeyword = true;
+    if(newsSearchHistory){
+        for (let i = 0; i < newsSearchHistory.length; i++) {
+            if(newsSearchHistory[i]===keyword){
+                newKeyword = false;
+                break;
+            }           
+        }
+    }
+    if(newKeyword){
+        newsSearchHistory.push(keyword);
+        localStorage.setItem("keywords",JSON.stringify(newsSearchHistory));
+    }
+}
 
 
 document.addEventListener('DOMContentLoaded', function() {
