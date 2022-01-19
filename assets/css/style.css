@@ -14,6 +14,12 @@ header, main, footer {
     display: none;
 }
 
+.searchHistory{
+    padding: 4px;
+    margin: 5px;
+    text-transform: uppercase;
+}
+
 @media (max-width: 600px){
     .brand-logo img{
         height: 56px;
