@@ -1,11 +1,11 @@
 # News 4 U
 
-## Pupose
+## Purpose
 Build news website to display news headlines and news based on user input
 
 ## Site Details
 As soon as user launches website then :
-- User will side navigation on left to search news by keyword
+- User will use side navigation on left to search news by keyword
 - In middle of screen user will see subtitle as "TOP 10 US Headlines"
 - User will see top 10 US headlines in English
 
@@ -32,17 +32,17 @@ Then I should be able to see top headlines and search bar
 
 When I input specific keyword
 
-Then I should be able to see top 10 news articles related to entered keywprds
+Then I should be able to see top 10 news articles related to entered keywords
 
-And I should be able to see the clickable and image for those articles
+And I should be able to see the clickable link and image for those articles
 
-AND I keyword shouldbe displayed in search history and search result persist when page is loaded
+And a keyword should be displayed in search history and search result persist when page is loaded
 
 When I click on the link
 
-Then I new window should be opened displaying article
+Then a new window should be opened displaying article
 
-When select piblisher 
+When I select publisher 
 
 Then my search result will have articles with selected publisher
 
