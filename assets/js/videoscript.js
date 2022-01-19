@@ -1,3 +1,4 @@
+var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
 
 var getYoutubeHeadlines = function() {
     var topYoutubeUrl = "" + apiKey + "&lang=en&country=us&max=10";
@@ -18,6 +19,7 @@ var getYoutubeHeadlines = function() {
 
 //get news based on url
 var getNewsByKeyword = function(url){
+    //var searchUrl = ""+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=10";
     fetch(url).then(function(response){
         if(response.ok){       
             response.json().then(function(data){
@@ -32,3 +34,15 @@ var getNewsByKeyword = function(url){
         alert("something went wrong: looks like news api is down");
     })
 }
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems);
+  });
+
+document.addEventListener('DOMContentLoaded', function() {
+    var sidenavEl = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenavEl);
+  });
