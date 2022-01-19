@@ -20,6 +20,8 @@ When user selects number of articles then based on selection number of articles 
 
 By default search keyword is used in articles description and title and user has choice to select option to search keyword either in title or description. 
 
+User will see search history which is saved in local storage
+
 # User Story
 As a reader,
 I should be able to search using most important topics/discusson of my interests,
