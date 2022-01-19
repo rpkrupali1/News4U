@@ -151,6 +151,7 @@ var displayYoutubeVideo = function(data) {
         content.className = "card-action";
 
         title.style.height = "40px"
+        title.style.color = "black";
     
         title.textContent = String(data[i].snippet.title);
         img.src = String(data[i].snippet.thumbnails.high.url);
