@@ -15,8 +15,6 @@ var searchHistoryEls = document.querySelector("#search-history");
 var keyword = localStorage.getItem("globalKeyword")
 var keyword = JSON.parse(keyword)
 
-console.log(keyword)
-
 var displayYoutubeVideo = function(data) {
     for (i = 0; i < data.length; i++) {
         videoLink = data[i].snippet.thumbnails.high.url.slice(23, 34)
@@ -44,7 +42,8 @@ var displayYoutubeVideo = function(data) {
     
         title.textContent = String(data[i].snippet.title);
         img.src = String(data[i].snippet.thumbnails.high.url);
-        link.href = String('https://www.youtube.com/watch?v=' + videoLink)
+        link.href = String('https://www.youtube.com/watch?v=' + videoLink) //Opens Youtube videos in new tab
+        link.setAttribute("target","_blank");
         img.style.padding = '0px auto';
     
         link.appendChild(title);
@@ -66,16 +65,16 @@ var getYoutube = function(keyword) {
   fetch(youtubeApi).then(function(response){
     if (response.ok){
       response.json().then(function(data){
-          
-        displayYoutubeVideo(data.items)
-      })
+        console.log(data);
+        displayYoutubeVideo(data.items);
+      });
     }
-  })
-  }
+  });
+}
 
 //save data in local storage
 var saveKeywords = function(keyword){
-    var newsSearchHistory = JSON.parse(window.localStorage.getItem("keywords")) || [];
+    var newsSearchHistory = JSON.parse(window.localStorage.getItem("videokeywords")) || [];
     var newKeyword = true;
     if(newsSearchHistory){
         for (let i = 0; i < newsSearchHistory.length; i++) {
@@ -87,15 +86,15 @@ var saveKeywords = function(keyword){
     }
     if(newKeyword){
         newsSearchHistory.push(keyword);
-        localStorage.setItem("keywords",JSON.stringify(newsSearchHistory));
+        localStorage.setItem("videokeywords",JSON.stringify(newsSearchHistory));
     }
 }
 
 // load data from local storage to search history
 var loadHistory = function(){
     searchHistoryEls.textContent = "";
-    searchHistoryEls.textContent = "News Search History";
-    var newsSearchHistory = JSON.parse(window.localStorage.getItem("keywords"));
+    searchHistoryEls.textContent = "Video Search History";
+    var newsSearchHistory = JSON.parse(window.localStorage.getItem("videokeywords"));
     if(newsSearchHistory){
         for (let i = 0; i < newsSearchHistory.length; i++) {
             var searchHistoryEl  = document.createElement("button");
@@ -118,9 +117,10 @@ var searchFormHandler = function(event){
     clearContents();
     filterListEl.style.display = "block";
     keyword = searchInputEl.value.trim();
-    var searchUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=' + apiKey + keyword;
-    getNewsByKeyword(searchUrl);
-    getNewsByKeyword(keyword);
+    //var searchUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=' + apiKey + keyword;
+    //getNewsByKeyword(searchUrl);
+    //getNewsByKeyword(keyword);
+    getYoutube(keyword);
 }
 
 // handle number of articles to be displayed by user input
@@ -161,6 +161,8 @@ var buttonClickHandler = function(event){
 
 
 loadHistory();
+//Display top stories by default
+getYoutube(keyword)
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
@@ -179,6 +181,6 @@ for (let i = 0; i < checkboxEls.length; i++) {
 }
 searchHistoryEls.addEventListener("click", buttonClickHandler);
 
-getYoutube(keyword)
+
 
 
