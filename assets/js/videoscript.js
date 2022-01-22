@@ -2,14 +2,16 @@ var displayresultsEl = document.querySelector("#displayresult");
 var headlinesKeyword = document.querySelector("#keyword");
 var rightEl = document.querySelector(".right");
 var topicInputEl = document.querySelector("#search");
-var apiKey = "AIzaSyAXys1kMFJOPaa7WQ0ePBzFjDbH2N_rG-Q";
+//var apiKey = "AIzaSyAXys1kMFJOPaa7WQ0ePBzFjDbH2N_rG-Q";
+//var apiKey = "AIzaSyCh6tZ6cxDqLPn9WZxWPz4BatEjNWziSKg";
+var apiKey = "AIzaSyCveLoP8L-hrOnox4JL8Pvl5XDO8efcgbo";
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
 var filterListEl = document.querySelector("#filter-list");
 var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
 var keyword;
-var numberOfArticles = 10;
+var maxResults = 10;
 var checkboxEls = document.querySelectorAll("input[type=checkbox]");
 var searchHistoryEls = document.querySelector("#search-history");
 var keyword = localStorage.getItem("globalKeyword")
@@ -58,8 +60,9 @@ var displayYoutubeVideo = function(data) {
 
 /*This get youtube video based on their keyword*/
 var getYoutube = function(keyword) {
-    console.log(keyword)
-    var youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=AIzaSyCh6tZ6cxDqLPn9WZxWPz4BatEjNWziSKg'
+
+    //var youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=AIzaSyCh6tZ6cxDqLPn9WZxWPz4BatEjNWziSKg'
+  var youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=' + maxResults + '&order=relevance&key=' + apiKey;
   
   fetch(youtubeApi).then(function(response){
     if (response.ok){
@@ -122,39 +125,20 @@ var searchFormHandler = function(event){
     getYoutube(keyword);
 }
 
-// handle number of articles to be displayed by user input
+// handle number of videos to be displayed by user input
 var selectArticleHandler = function(event){
     event.preventDefault();
-    numberOfArticles = event.target.value;
-    clearContents();
-    var searchUrl = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
-    getNewsByKeyword(searchUrl);
+    maxResults = event.target.value;
+    clearContents();    
+    getYoutube(keyword);
 }
 
-//handle articles displayed based on checkbox value
-var checkboxHandler = function(event){
-    event.preventDefault();
-    clearContents();
-    var includeInTitle = document.querySelector("#title-input").checked;
-    var includeInDescription = document.querySelector("#description-input").checked ;
-    var url;
-    if(includeInTitle && includeInDescription)
-        url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=title,description";
-    else if(includeInTitle && !includeInDescription)
-        url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=title";
-    else if(includeInDescription && !includeInTitle)
-        url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=description";
-    else
-        url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
-    console.log(url);
-    getNewsByKeyword(url);
-}
 
 var buttonClickHandler = function(event){
     clearContents();
     keyword = event.target.getAttribute("id");
     if(keyword){
-        getYoutube(searchUrl);
+        getYoutube(keyword);
     }
 }
 
@@ -175,9 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 searchFormEl.addEventListener("submit",searchFormHandler);
 selectNumOfArticlesEl.addEventListener("change", selectArticleHandler);
-for (let i = 0; i < checkboxEls.length; i++) {
-    checkboxEls[i].addEventListener("change",checkboxHandler);    
-}
 searchHistoryEls.addEventListener("click", buttonClickHandler);
 
 
