@@ -23,12 +23,19 @@ var getTopHeadlines = function() {
                 displayData(data);
             })
         }
-        else
-            alert("APi does not work");
+        else{
+            // open model when you get an error
+            var modals = document.querySelector('#modal1');
+            var instances = M.Modal.init(modals);
+            instances.open();
+        }
     })
     .catch(function(error){
-        alert("something went wrong: looks like news api is down");
-    })
+        // open model when you get an error
+        var modals = document.querySelector('#modal1');
+        var instances = M.Modal.init(modals);
+        instances.open();
+    });
 }
 
 //get news based on url
@@ -180,7 +187,7 @@ var buttonClickHandler = function(event){
 }
 
 // Get top 10 headlines for US in english as soon as page is loaded
-getTopHeadlines();
+//getTopHeadlines();
 loadHistory();
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -3,8 +3,8 @@ var headlinesKeyword = document.querySelector("#keyword");
 var rightEl = document.querySelector(".right");
 var topicInputEl = document.querySelector("#search");
 //var apiKey = "AIzaSyAXys1kMFJOPaa7WQ0ePBzFjDbH2N_rG-Q";
-//var apiKey = "AIzaSyCh6tZ6cxDqLPn9WZxWPz4BatEjNWziSKg";
-var apiKey = "AIzaSyCveLoP8L-hrOnox4JL8Pvl5XDO8efcgbo";
+var apiKey = "AIzaSyCh6tZ6cxDqLPn9WZxWPz4BatEjNWziSKg";
+//var apiKey = "AIzaSyCveLoP8L-hrOnox4JL8Pvl5XDO8efcgbo";
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
@@ -60,12 +60,11 @@ var displayYoutubeVideo = function(data) {
 
 /*This get youtube video based on their keyword*/
 var getYoutube = function(keyword) {
-
-    //var youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=AIzaSyCh6tZ6cxDqLPn9WZxWPz4BatEjNWziSKg'
   var youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=' + maxResults + '&order=relevance&key=' + apiKey;
   
   fetch(youtubeApi).then(function(response){
     if (response.ok){
+        console.log(response.json());
       response.json().then(function(data){
         if(keyword)
             saveKeywords(); // When valid response comes then result will be saved in local storage
@@ -73,7 +72,20 @@ var getYoutube = function(keyword) {
         loadHistory();
       });
     }
+    else {
+        // open model when you get an error
+        var modals = document.querySelector('#modal1');
+        var instances = M.Modal.init(modals);
+        instances.open();
+    }    
+  })
+  .catch(function(error){
+    // open model when you get an error
+    var modals = document.querySelector('#modal1');
+    var instances = M.Modal.init(modals);
+    instances.open();
   });
+
 }
 
 //save data in local storage
@@ -121,7 +133,6 @@ var searchFormHandler = function(event){
     clearContents();
     filterListEl.style.display = "block";
     keyword = searchInputEl.value.trim();
-    //var searchUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=' + apiKey + keyword;
     getYoutube(keyword);
 }
 
@@ -150,6 +161,7 @@ loadHistory();
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
+
   });
 
 document.addEventListener('DOMContentLoaded', function() {
