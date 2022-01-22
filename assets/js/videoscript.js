@@ -67,6 +67,7 @@ var getYoutube = function(keyword) {
         if(keyword)
             saveKeywords(); // When valid response comes then result will be saved in local storage
         displayYoutubeVideo(data.items);
+        loadHistory();
       });
     }
   });
@@ -118,8 +119,6 @@ var searchFormHandler = function(event){
     filterListEl.style.display = "block";
     keyword = searchInputEl.value.trim();
     //var searchUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=' + apiKey + keyword;
-    //getNewsByKeyword(searchUrl);
-    //getNewsByKeyword(keyword);
     getYoutube(keyword);
 }
 
@@ -159,10 +158,10 @@ var buttonClickHandler = function(event){
     }
 }
 
-
-loadHistory();
 //Display top stories by default
 getYoutube(keyword)
+loadHistory();
+
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
