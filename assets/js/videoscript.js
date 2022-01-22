@@ -2,20 +2,15 @@ var displayresultsEl = document.querySelector("#displayresult");
 var headlinesKeyword = document.querySelector("#keyword");
 var rightEl = document.querySelector(".right");
 var topicInputEl = document.querySelector("#search");
-//var apiKey = "AIzaSyAXys1kMFJOPaa7WQ0ePBzFjDbH2N_rG-Q";
-var apiKey = "AIzaSyCh6tZ6cxDqLPn9WZxWPz4BatEjNWziSKg";
-//var apiKey = "AIzaSyCveLoP8L-hrOnox4JL8Pvl5XDO8efcgbo";
+var apiKeys = ["AIzaSyAXys1kMFJOPaa7WQ0ePBzFjDbH2N_rG-Q","AIzaSyCveLoP8L-hrOnox4JL8Pvl5XDO8efcgbo"];
+var apiKey = "AIzaSyAXys1kMFJOPaa7WQ0ePBzFjDbH2N_rG-Q";
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
-var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
 var filterListEl = document.querySelector("#filter-list");
 var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
-var keyword;
+var keyword = "news";
 var maxResults = 10;
-var checkboxEls = document.querySelectorAll("input[type=checkbox]");
 var searchHistoryEls = document.querySelector("#search-history");
-var keyword = localStorage.getItem("globalKeyword")
-var keyword = JSON.parse(keyword)
 
 var displayYoutubeVideo = function(data) {
     for (i = 0; i < data.length; i++) {
@@ -64,7 +59,6 @@ var getYoutube = function(keyword) {
   
   fetch(youtubeApi).then(function(response){
     if (response.ok){
-        console.log(response.json());
       response.json().then(function(data){
         if(keyword)
             saveKeywords(); // When valid response comes then result will be saved in local storage

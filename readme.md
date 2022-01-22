@@ -1,7 +1,10 @@
 # News 4 U
 
 ## Pupose
-Build news website to display news headlines and news based on user input
+Build news website to display news headlines, display articles and videos based on user input
+
+Limitation:
+User can search only using keywords without spaces.
 
 ## Site Details
 As soon as user launches website then :
