@@ -59,3 +59,4 @@ Then I should receive search result within those parameters
 
 #### Technologies Used
 API Used: https://gnews.io/
+https://youtube.googleapis.com/youtube/v3/

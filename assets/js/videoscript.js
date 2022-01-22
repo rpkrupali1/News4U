@@ -2,7 +2,7 @@ var displayresultsEl = document.querySelector("#displayresult");
 var headlinesKeyword = document.querySelector("#keyword");
 var rightEl = document.querySelector(".right");
 var topicInputEl = document.querySelector("#search");
-var apiKey = "AIzaSyCh6tZ6cxDqLPn9WZxWPz4BatEjNWziSKg";
+var apiKey = "AIzaSyAXys1kMFJOPaa7WQ0ePBzFjDbH2N_rG-Q";
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
@@ -118,8 +118,9 @@ var searchFormHandler = function(event){
     clearContents();
     filterListEl.style.display = "block";
     keyword = searchInputEl.value.trim();
-    var searchUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=' + apiKey;
+    var searchUrl = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=10&order=relevance&key=' + apiKey + keyword;
     getNewsByKeyword(searchUrl);
+    getNewsByKeyword(keyword);
 }
 
 // handle number of articles to be displayed by user input
@@ -127,7 +128,7 @@ var selectArticleHandler = function(event){
     event.preventDefault();
     numberOfArticles = event.target.value;
     clearContents();
-    var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
+    var searchUrl = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
     getNewsByKeyword(searchUrl);
 }
 
@@ -139,13 +140,13 @@ var checkboxHandler = function(event){
     var includeInDescription = document.querySelector("#description-input").checked ;
     var url;
     if(includeInTitle && includeInDescription)
-        url = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=title,description";
+        url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=title,description";
     else if(includeInTitle && !includeInDescription)
-        url = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=title";
+        url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=title";
     else if(includeInDescription && !includeInTitle)
-        url = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=description";
+        url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles + "&in=description";
     else
-        url = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
+        url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
     console.log(url);
     getNewsByKeyword(url);
 }
