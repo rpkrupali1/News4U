@@ -18,7 +18,6 @@ var keyword = JSON.parse(keyword)
 var displayYoutubeVideo = function(data) {
     for (i = 0; i < data.length; i++) {
         videoLink = data[i].snippet.thumbnails.high.url.slice(23, 34)
-        console.log(videoLink)
     
         var container = document.createElement('div')
         var column = document.createElement('div')
@@ -42,8 +41,8 @@ var displayYoutubeVideo = function(data) {
     
         title.textContent = String(data[i].snippet.title);
         img.src = String(data[i].snippet.thumbnails.high.url);
-        link.href = String('https://www.youtube.com/watch?v=' + videoLink) //Opens Youtube videos in new tab
-        link.setAttribute("target","_blank");
+        link.href = String('https://www.youtube.com/watch?v=' + videoLink) 
+        link.setAttribute("target","_blank"); //Opens Youtube videos in new tab
         img.style.padding = '0px auto';
     
         link.appendChild(title);
@@ -65,7 +64,8 @@ var getYoutube = function(keyword) {
   fetch(youtubeApi).then(function(response){
     if (response.ok){
       response.json().then(function(data){
-        console.log(data);
+        if(keyword)
+            saveKeywords(); // When valid response comes then result will be saved in local storage
         displayYoutubeVideo(data.items);
       });
     }
@@ -73,7 +73,7 @@ var getYoutube = function(keyword) {
 }
 
 //save data in local storage
-var saveKeywords = function(keyword){
+var saveKeywords = function(){
     var newsSearchHistory = JSON.parse(window.localStorage.getItem("videokeywords")) || [];
     var newKeyword = true;
     if(newsSearchHistory){
