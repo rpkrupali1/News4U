@@ -14,7 +14,7 @@ var checkboxEls = document.querySelectorAll("input[type=checkbox]");
 var searchHistoryEls = document.querySelector("#search-history");
 
 //get top 10 headlines
-/*var getTopHeadlines = function() {
+var getTopHeadlines = function() {
     var topHeadlinesUrl = "https://gnews.io/api/v4/top-headlines?token=" + apiKey + "&lang=en&country=us&max=10";
     fetch(topHeadlinesUrl).then(function(response){
         if(response.ok){         
@@ -29,7 +29,7 @@ var searchHistoryEls = document.querySelector("#search-history");
     .catch(function(error){
         alert("something went wrong: looks like news api is down");
     })
-}*/
+}
 
 //get news based on url
 var getNewsByKeyword = function(url){
