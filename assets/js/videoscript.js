@@ -8,10 +8,11 @@ var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var filterListEl = document.querySelector("#filter-list");
 var selectNumOfArticlesEl = document.querySelector("#select-numofarticles");
-var keyword = "news";
+var keyword;
 var maxResults = 10;
 var searchHistoryEls = document.querySelector("#search-history");
 
+//display you tube videos on screen
 var displayYoutubeVideo = function(data) {
     for (i = 0; i < data.length; i++) {
         videoLink = data[i].snippet.thumbnails.high.url.slice(23, 34)
@@ -55,7 +56,11 @@ var displayYoutubeVideo = function(data) {
 
 /*This get youtube video based on their keyword*/
 var getYoutube = function(keyword) {
-  var youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=' + maxResults + '&order=relevance&key=' + apiKey;
+  var youtubeApi;
+  if(!keyword)
+    youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&regionCode=US&maxResults=' + maxResults + '&order=relevance&key=' + apiKey;
+  else
+    youtubeApi = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='+ keyword +'&channelId=UCYfdidRxbB8Qhf0Nx7ioOYw&maxResults=' + maxResults + '&order=relevance&key=' + apiKey;
   
   fetch(youtubeApi).then(function(response){
     if (response.ok){
@@ -68,6 +73,8 @@ var getYoutube = function(keyword) {
     }
     else {
         // open model when you get an error
+        var modalHeadline = "YouTube Quota exceeded";
+        var modalContent = "The request cannot be completed because you have exceeded your maximum Youtube Quota and your key is not valid any more.";
         var modals = document.querySelector('#modal1');
         var instances = M.Modal.init(modals);
         instances.open();
@@ -166,7 +173,3 @@ document.addEventListener('DOMContentLoaded', function() {
 searchFormEl.addEventListener("submit",searchFormHandler);
 selectNumOfArticlesEl.addEventListener("change", selectArticleHandler);
 searchHistoryEls.addEventListener("click", buttonClickHandler);
-
-
-
-

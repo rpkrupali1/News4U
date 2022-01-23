@@ -25,6 +25,8 @@ var getTopHeadlines = function() {
         }
         else{
             // open model when you get an error
+            var modalHeadline = "NewsAPI Quota exceeded";
+        var modalContent = "The request cannot be completed because you have exceeded your maximum News API Quota and your key is not valid any more.";
             var modals = document.querySelector('#modal1');
             var instances = M.Modal.init(modals);
             instances.open();
@@ -36,6 +38,12 @@ var getTopHeadlines = function() {
         var instances = M.Modal.init(modals);
         instances.open();
     });
+}
+
+var openModal = function(modalHeading,modalbodyText){
+    var modals = document.querySelector('#modal1');
+    var instances = M.Modal.init(modals);
+    instances.open();
 }
 
 //get news based on url
@@ -187,7 +195,7 @@ var buttonClickHandler = function(event){
 }
 
 // Get top 10 headlines for US in english as soon as page is loaded
-//getTopHeadlines();
+getTopHeadlines();
 loadHistory();
 
 document.addEventListener('DOMContentLoaded', function() {
