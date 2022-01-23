@@ -37,7 +37,7 @@
             </li>
             <li class="search">
                 <form id="search-form">
-                    <input id="search-input" placeholder=" search articles" type="search" required ></input>
+                    <input id="search-input" placeholder=" search videos" type="search" required ></input>
                     <button class="btn light-blue accent-1 black-text center-align" type="submit" id="search-btn">
                         Search
                         <i class="material-icons">search</i>
@@ -47,18 +47,6 @@
             <li id="filter-list">
                 <div id="filters" class="black-text">
                     <p>Select Filters:</p>
-                    <div id="title">
-                        <label>
-                            <input type="checkbox" id="title-input" class="filled-in" checked="checked" />
-                            <span class="black-text">Include In Title </span>
-                        </label>
-                    </div>
-                    <div id="description">
-                        <label>
-                            <input type="checkbox" id="description-input" class="filled-in" checked="checked" />
-                            <span class="black-text">Include In Description </span>
-                        </label>
-                    </div>
                     <div id="numberofresults" class="input-field col s12">
                         <select id="select-numofarticles">
                             <option value="10">10</option>
@@ -67,7 +55,7 @@
                             <option value="40">40</option>
                             <option value="50">50</option>
                         </select>
-                        <label>Select number of articles to be returned</label>
+                        <label>Select number of videos to be returned</label>
                     </div>
                 </div>
             </li>
@@ -80,7 +68,7 @@
 
     </header>
     <main>
-        <div id="displayresult-subtitle" class="subtitle" style="margin-top: 10px;"></div>
+        <!-- <div id="displayresult-subtitle" class="subtitle" style="margin-top: 10px;"></div> -->
         <div id="displayresult"></div>
         <div id="modal1" class="modal">
             <div class="modal-content">
@@ -96,6 +84,6 @@
 
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/videoscript.js"></script>
 </body>
 </html>

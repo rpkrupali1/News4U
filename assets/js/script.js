@@ -2,7 +2,7 @@ var displayresultsEl = document.querySelector("#displayresult");
 var headlinesKeyword = document.querySelector("#keyword");
 var rightEl = document.querySelector(".right");
 var topicInputEl = document.querySelector("#search");
-var apiKey = "08c09a0a9d776ef2eba4f3713f19ff9e";
+var apiKey = "20ed86d982e9cde1966cac58a3e359ef";
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var displayresultSubtitleEl = document.querySelector("#displayresult-subtitle");
@@ -23,12 +23,29 @@ var getTopHeadlines = function() {
                 displayData(data);
             })
         }
-        else
-            alert("APi does not work");
+        else{
+            // open model when you get an error
+            var modalHeadline = "NewsAPI Quota exceeded";
+            var modalContent = "The request cannot be completed because you have exceeded your maximum News API Quota and your key is not valid any more.";
+            openModal(modalHeadline,modalContent);
+        }
     })
     .catch(function(error){
-        alert("something went wrong: looks like news api is down");
-    })
+        // open model when you get an error
+        var modalHeadline = "NewsAPI Quota exceeded";
+        var modalContent = "The request cannot be completed because you have exceeded your maximum News API Quota and your key is not valid any more.";
+        openModal(modalHeadline,modalContent);
+    });
+}
+
+var openModal = function(modalHeading,modalbodyText){
+    var modalEl = document.querySelector('#modal1');
+    var instances = M.Modal.init(modalEl);
+    instances.open();
+    var modelHeadingEl = modalEl.querySelector("div h4");
+    modelHeadingEl.textContent = modalHeading;
+    var modelContentEl = modalEl.querySelector("div p");
+    modelContentEl.textContent = modalbodyText;
 }
 
 //get news based on url
@@ -137,6 +154,13 @@ var searchFormHandler = function(event){
     clearContents();
     filterListEl.style.display = "block";
     keyword = searchInputEl.value.trim();
+    //if input string has spaces then 
+    if(keyword.indexOf(' ') >= 0){
+        var modalHeadline = "Invalid Search Key";
+        var modalContent = "Search key is invalid. Please enter a valid search key without any space.";
+        openModal(modalHeadline,modalContent);
+        return;
+    }        
     var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
     getNewsByKeyword(searchUrl);
 }
