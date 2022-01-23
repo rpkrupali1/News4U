@@ -53,5 +53,7 @@ Deployed Application:
 ![Deployed Application](./assets/images/DeployedApplication-VideoPage.PNG)
 
 When api key is exceeded user will get an error modal as below:
-![Deployed Application](./assets/images/ErrorModalWhenApiExceeded.PNG)
+![ErrorModal](./assets/images/ErrorModalWhenApiExceeded.PNG)
 
+When user enters invalid key then an error displayed as below:
+![ErrorModal](./assets/images/InvalidSearchKey.PNG)

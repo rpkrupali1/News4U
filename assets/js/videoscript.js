@@ -76,18 +76,25 @@ var getYoutube = function(keyword) {
         // open model when you get an error
         var modalHeadline = "YouTube Quota exceeded";
         var modalContent = "The request cannot be completed because you have exceeded your maximum Youtube Quota and your key is not valid any more.";
-        var modals = document.querySelector('#modal1');
-        var instances = M.Modal.init(modals);
-        instances.open();
+        openModal(modalHeadline,modalContent);
     }    
   })
   .catch(function(error){
     // open model when you get an error
-    var modals = document.querySelector('#modal1');
-    var instances = M.Modal.init(modals);
-    instances.open();
+    var modalHeadline = "YouTube Quota exceeded";
+    var modalContent = "The request cannot be completed because you have exceeded your maximum Youtube Quota and your key is not valid any more.";
+    openModal(modalHeadline,modalContent);
   });
+}
 
+var openModal = function(modalHeading,modalbodyText){
+    var modalEl = document.querySelector('#modal1');
+    var instances = M.Modal.init(modalEl);
+    instances.open();
+    var modelHeadingEl = modalEl.querySelector("div h4");
+    modelHeadingEl.textContent = modalHeading;
+    var modelContentEl = modalEl.querySelector("div p");
+    modelContentEl.textContent = modalbodyText;
 }
 
 //save data in local storage
@@ -135,6 +142,13 @@ var searchFormHandler = function(event){
     clearContents();
     filterListEl.style.display = "block";
     keyword = searchInputEl.value.trim();
+    //if input string has spaces then 
+    if(keyword.indexOf(' ') >= 0){
+        var modalHeadline = "Invalid Search Key";
+        var modalContent = "Search key is invalid. Please enter a valid search key without any space.";
+        openModal(modalHeadline,modalContent);
+        return;
+    }  
     getYoutube(keyword);
 }
 
