@@ -204,7 +204,7 @@ var buttonClickHandler = function(event){
 }
 
 // Get top 10 headlines for US in english as soon as page is loaded
-//getTopHeadlines();
+getTopHeadlines();
 loadHistory();
 
 document.addEventListener('DOMContentLoaded', function() {
