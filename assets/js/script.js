@@ -26,24 +26,26 @@ var getTopHeadlines = function() {
         else{
             // open model when you get an error
             var modalHeadline = "NewsAPI Quota exceeded";
-        var modalContent = "The request cannot be completed because you have exceeded your maximum News API Quota and your key is not valid any more.";
-            var modals = document.querySelector('#modal1');
-            var instances = M.Modal.init(modals);
-            instances.open();
+            var modalContent = "The request cannot be completed because you have exceeded your maximum News API Quota and your key is not valid any more.";
+            openModal(modalHeadline,modalContent);
         }
     })
     .catch(function(error){
         // open model when you get an error
-        var modals = document.querySelector('#modal1');
-        var instances = M.Modal.init(modals);
-        instances.open();
+        var modalHeadline = "NewsAPI Quota exceeded";
+        var modalContent = "The request cannot be completed because you have exceeded your maximum News API Quota and your key is not valid any more.";
+        openModal(modalHeadline,modalContent);
     });
 }
 
 var openModal = function(modalHeading,modalbodyText){
-    var modals = document.querySelector('#modal1');
-    var instances = M.Modal.init(modals);
+    var modalEl = document.querySelector('#modal1');
+    var instances = M.Modal.init(modalEl);
     instances.open();
+    var modelHeadingEl = modalEl.querySelector("div h4");
+    modelHeadingEl.textContent = modalHeading;
+    var modelContentEl = modalEl.querySelector("div p");
+    modelContentEl.textContent = modalbodyText;
 }
 
 //get news based on url
@@ -152,6 +154,13 @@ var searchFormHandler = function(event){
     clearContents();
     filterListEl.style.display = "block";
     keyword = searchInputEl.value.trim();
+    //if input string has spaces then 
+    if(keyword.indexOf(' ') >= 0){
+        var modalHeadline = "Invalid Search Key";
+        var modalContent = "Search key is invalid. Please enter a valid search key without any space.";
+        openModal(modalHeadline,modalContent);
+        return;
+    }        
     var searchUrl = "https://gnews.io/api/v4/search?q="+ keyword + "&token=" + apiKey + "&lang=en&country=us&max=" + numberOfArticles;
     getNewsByKeyword(searchUrl);
 }
@@ -195,7 +204,7 @@ var buttonClickHandler = function(event){
 }
 
 // Get top 10 headlines for US in english as soon as page is loaded
-getTopHeadlines();
+//getTopHeadlines();
 loadHistory();
 
 document.addEventListener('DOMContentLoaded', function() {
