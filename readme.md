@@ -37,7 +37,8 @@ so that I can keep up with the current events
     - HTML
     - CSS
     - Java Script
-- Network Storage API
+- CSS Framework Used: [Materialize](https://materializecss.com/)
+- Client side storage to store persistent data.
 
 #### Current Limitation/Future Enhanceent:
 User can search only using keywords without spaces.
